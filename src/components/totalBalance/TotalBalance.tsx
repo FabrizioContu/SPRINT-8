@@ -6,7 +6,7 @@ const TotalBalance: React.FC = () => {
   const { totalWeekBalance } = useProvider();
 
   return (
-    <div className="mx-96 m-10">
+    <div className="mx-96 m-10 pt-20">
       <div className="bg-green-700 text-white rounded-xl p-5 flex justify-between">
         <div className="ms-5">
           <h2 className="font-sans">Total Balance</h2>

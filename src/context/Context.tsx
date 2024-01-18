@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useContext } from "react";
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 export const Context = createContext<ContextProps | null>(null);
 
@@ -15,8 +15,11 @@ interface ContextProviderProps {
 }
 
 interface ContextProps {
-  weeksArray: weekExpenses[];
+  weeksList: weekExpenses[];
   totalWeekBalance: number;
+  daysData: string[];
+  expensesDayData: number[];
+  currentWeek: number;
 }
 
 interface weekExpenses {
@@ -33,11 +36,13 @@ interface weekExpenses {
 export const ContextProvider: React.FC<ContextProviderProps> = ({
   children,
 }) => {
-  const weeksArray: weekExpenses[] = [
+  const [currentWeek, setCurrentWeek] = useState(0);
+
+  const weeksList: weekExpenses[] = [
     {
       monday: 380,
       tuesday: 420,
-      wednesday: 80,
+      wednesday: 180,
       thursday: 180,
       friday: 421,
       saturday: 300,
@@ -72,15 +77,29 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     },
   ];
 
+  // Data for TotalBalance
   const calculateWeekBalance = (week: weekExpenses): number => {
     return Object.values(week).reduce((total, current) => total + current, 0);
   };
+  const totalWeekBalance = calculateWeekBalance(weeksList[currentWeek]);
 
-  const totalWeekBalance = calculateWeekBalance(weeksArray[0]);
+  //Data for GraphicData
+  const daysData = Object.keys(weeksList[currentWeek]).map((day) => `${day}`);
+  const expensesDayData = Object.values(weeksList[currentWeek]);
 
   return (
-    <Context.Provider value={{ weeksArray, totalWeekBalance }}>
-      {children}
-    </Context.Provider>
+    <div className="bg-yellow-50">
+      <Context.Provider
+        value={{
+          weeksList,
+          totalWeekBalance,
+          daysData,
+          expensesDayData,
+          currentWeek,
+        }}
+      >
+        {children}
+      </Context.Provider>
+    </div>
   );
 };
