@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { useProvider } from "../../context/Context";
 
 function DailyVariation() {
   const { percentageVariation, sign } = useProvider();
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -10,7 +12,7 @@ function DailyVariation() {
           {sign}
           {percentageVariation}%
         </p>
-        <h3 className="font-sans font-bold">from yesterday</h3>
+        <h3 className="font-sans font-bold">{t("FromYesterday")}</h3>
       </div>
     </div>
   );

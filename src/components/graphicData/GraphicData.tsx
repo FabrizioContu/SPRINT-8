@@ -12,6 +12,7 @@ import { Bar } from "react-chartjs-2";
 import { useProvider } from "../../context/Context";
 import DailyExpenses from "../dailyExpenses/DailyExpenses";
 import DailyVariation from "../dailyVariation/DailyVariation";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -50,6 +51,7 @@ export const options = {
 //Graphics
 function GraphicData() {
   const { daysData, expensesDayData } = useProvider();
+  const { t } = useTranslation();
 
   const backgroundColors = daysData.map((day) =>
     day === "sunday" ? "#fd5c63" : "#018749"
@@ -71,7 +73,7 @@ function GraphicData() {
     <div className="mx-96 pb-20">
       <div className=" bg-yellow-200 rounded-3xl p-10 font-sans">
         <h2 className="flex justify-start text-2xl font-bold mb-10">
-          Expenses: Last Week
+          {t("ExpensesLastWeek")}
         </h2>
         <p className="text-3xl font-bold  text-black pb-5"></p>
         <Bar options={options} data={data} />
