@@ -20,6 +20,10 @@ interface ContextProps {
   daysData: string[];
   expensesDayData: number[];
   currentWeek: number;
+  todayExpenses: number;
+  yesterdayExpenses: number;
+  percentageVariation: number;
+  sign: string;
 }
 
 interface weekExpenses {
@@ -43,7 +47,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       monday: 380,
       tuesday: 420,
       wednesday: 180,
-      thursday: 180,
+      thursday: 200,
       friday: 421,
       saturday: 300,
       sunday: 600,
@@ -55,7 +59,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       thursday: 720,
       friday: 20,
       saturday: 420,
-      sunday: 600,
+      sunday: 800,
     },
     {
       monday: 400,
@@ -64,7 +68,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       thursday: 60,
       friday: 200,
       saturday: 150,
-      sunday: 350,
+      sunday: 550,
     },
     {
       monday: 300,
@@ -73,7 +77,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       thursday: 150,
       friday: 230,
       saturday: 130,
-      sunday: 20,
+      sunday: 420,
     },
   ];
 
@@ -87,6 +91,31 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const daysData = Object.keys(weeksList[currentWeek]).map((day) => `${day}`);
   const expensesDayData = Object.values(weeksList[currentWeek]);
 
+  //Data for DailyExpenses
+  const getExpensesByDay = (dayIndex: number): number => {
+    const adjustedIndex = dayIndex === -1 || dayIndex === 0 ? 6 : dayIndex - 1;
+    const daysOfWeek = Object.keys(weeksList[currentWeek]);
+    const day = daysOfWeek[adjustedIndex];
+
+    return weeksList[currentWeek][day];
+  };
+
+  const todayExpenses = getExpensesByDay(new Date().getDay());
+  const yesterdayExpenses = getExpensesByDay(new Date().getDay() - 1);
+
+  //Get the percentage variation
+  const calculatePercentageVariation = (
+    currentValue: number,
+    previousValue: number
+  ): number => {
+    return ((currentValue - previousValue) / previousValue) * 100;
+  };
+
+  const percentageVariation = Number(
+    calculatePercentageVariation(todayExpenses, yesterdayExpenses).toFixed(2)
+  );
+  const sign = percentageVariation > 0 ? "+" : "";
+
   return (
     <div className="bg-yellow-50">
       <Context.Provider
@@ -96,6 +125,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
           daysData,
           expensesDayData,
           currentWeek,
+          todayExpenses,
+          yesterdayExpenses,
+          percentageVariation,
+          sign,
         }}
       >
         {children}

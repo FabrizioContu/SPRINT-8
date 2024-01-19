@@ -10,6 +10,8 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useProvider } from "../../context/Context";
+import DailyExpenses from "../dailyExpenses/DailyExpenses";
+import DailyVariation from "../dailyVariation/DailyVariation";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +26,7 @@ ChartJS.register(
 //Options
 export const options = {
   responsive: true,
+
   plugins: {
     legend: {
       position: "top" as const,
@@ -65,8 +68,8 @@ function GraphicData() {
   };
 
   return (
-    <div className="mx-96 m-10 pb-20">
-      <div className=" bg-white rounded-3xl p-10 font-sans">
+    <div className="mx-96 pb-20">
+      <div className=" bg-yellow-200 rounded-3xl p-10 font-sans">
         <h2 className="flex justify-start text-2xl font-bold mb-10">
           Expenses: Last Week
         </h2>
@@ -74,7 +77,16 @@ function GraphicData() {
         <Bar options={options} data={data} />
         <div className="my-5 "></div>
         <div className="flex justify-between mt-3"></div>
+
         <hr className="border-2" />
+        <div className="rounded-xl py-5 flex justify-between">
+          <div>
+            <DailyExpenses />
+          </div>
+          <div className="text-end place-self-end">
+            <DailyVariation />
+          </div>
+        </div>
       </div>
     </div>
   );
