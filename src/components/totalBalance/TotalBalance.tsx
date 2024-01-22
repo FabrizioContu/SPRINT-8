@@ -5,7 +5,8 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import Languages from "../Languages";
 
 const TotalBalance: React.FC = () => {
-  const { totalWeekBalance } = useProvider();
+  const { totalWeekBalance, currentWeek, weeksList, changeWeek } =
+    useProvider();
   const { t } = useTranslation();
 
   return (
@@ -17,8 +18,16 @@ const TotalBalance: React.FC = () => {
           <p className="font-sans font-bold text-3xl">{totalWeekBalance}€</p>
         </div>
         <div className="flex justify-center items-center gap-3 me-5 text-2xl">
-          <FaArrowLeftLong />
-          <FaArrowRightLong />
+          {currentWeek > 0 && (
+            <a className="cursor-pointer" onClick={() => changeWeek("prev")}>
+              <FaArrowLeftLong />
+            </a>
+          )}
+          {currentWeek < weeksList.length - 1 && (
+            <a className="cursor-pointer" onClick={() => changeWeek("next")}>
+              <FaArrowRightLong />
+            </a>
+          )}
         </div>
       </div>
     </div>

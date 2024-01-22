@@ -24,6 +24,7 @@ interface ContextProps {
   yesterdayExpenses: number;
   percentageVariation: number;
   sign: string;
+  changeWeek: (direction: "next" | "prev") => void;
 }
 
 interface weekExpenses {
@@ -40,7 +41,7 @@ interface weekExpenses {
 export const ContextProvider: React.FC<ContextProviderProps> = ({
   children,
 }) => {
-  const [currentWeek] = useState(0);
+  const [currentWeek, setCurrentWeek] = useState(0);
 
   const weeksList: weekExpenses[] = [
     {
@@ -116,6 +117,15 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   );
   const sign = percentageVariation > 0 ? "+" : "";
 
+  // change week
+  const changeWeek = (direction: "next" | "prev"): void => {
+    const newWeek = direction === "next" ? currentWeek + 1 : currentWeek - 1;
+
+    if (newWeek >= 0 && newWeek < weeksList.length) {
+      setCurrentWeek(newWeek);
+    }
+  };
+
   return (
     <div className="bg-yellow-50">
       <Context.Provider
@@ -129,6 +139,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
           yesterdayExpenses,
           percentageVariation,
           sign,
+          changeWeek,
         }}
       >
         {children}

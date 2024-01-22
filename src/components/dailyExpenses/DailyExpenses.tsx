@@ -9,9 +9,7 @@ function DailyExpenses() {
     <div>
       <div className="">
         <h2 className="font-sans text-gray-400">{t("TodayExpenses")}</h2>
-        <p className="font-bold sm:text-lg md:text-4xl lg:text-6xl">
-          {todayExpenses}€
-        </p>
+        <p className="font-bold sm:text-lg lg:text-6xl">{todayExpenses}€</p>
       </div>
     </div>
   );

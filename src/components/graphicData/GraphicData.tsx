@@ -29,7 +29,6 @@ const options = {
 
   plugins: {
     legend: {
-      position: "top" as const,
       display: false,
     },
   },
@@ -53,8 +52,11 @@ function GraphicData() {
   const { daysData, expensesDayData } = useProvider();
   const { t } = useTranslation();
 
-  const backgroundColors = daysData.map((day) =>
-    day === "sunday" ? "#fd5c63" : "#018749"
+  const currentDayIndex = new Date().getDay();
+  const adjustedIndex = currentDayIndex === 0 ? 6 : currentDayIndex - 1;
+
+  const backgroundColors = daysData.map((_day, index) =>
+    index === adjustedIndex ? "#fd5c63" : "#018749"
   );
 
   const data = {
@@ -72,7 +74,7 @@ function GraphicData() {
   return (
     <div className="mx-96 pb-20 sm:flex-col">
       <div className=" bg-yellow-200  rounded-3xl p-10 font-sans">
-        <h2 className="flex justify-start sm:text-sm lg:text-xl font-bold mb-10">
+        <h2 className="flex justify-start sm:text-sm md:text-xl font-bold mb-10">
           {t("ExpensesLastWeek")}
         </h2>
         <p className="text-3xl font-bold  text-black pb-5"></p>
