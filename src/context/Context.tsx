@@ -40,7 +40,7 @@ interface weekExpenses {
 export const ContextProvider: React.FC<ContextProviderProps> = ({
   children,
 }) => {
-  const [currentWeek, setCurrentWeek] = useState(0);
+  const [currentWeek] = useState(0);
 
   const weeksList: weekExpenses[] = [
     {

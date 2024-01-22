@@ -24,8 +24,7 @@ ChartJS.register(
   Filler
 );
 
-//Options
-export const options = {
+const options = {
   responsive: true,
 
   plugins: {
@@ -41,14 +40,15 @@ export const options = {
       },
     },
     y: {
+      max: 600, // Set the maximum value for the y-axis
       grid: {
-        display: false,
+        display: true, // Display grid lines
+        drawOnChartArea: false, // Draw grid lines only on the chart area
       },
     },
   },
 };
 
-//Graphics
 function GraphicData() {
   const { daysData, expensesDayData } = useProvider();
   const { t } = useTranslation();
