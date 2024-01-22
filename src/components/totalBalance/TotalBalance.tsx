@@ -19,14 +19,36 @@ const TotalBalance: React.FC = () => {
         </div>
         <div className="flex justify-center items-center gap-3 me-5 text-2xl">
           {currentWeek > 0 && (
-            <a className="cursor-pointer" onClick={() => changeWeek("prev")}>
+            <button
+              className="cursor-pointer"
+              onClick={() => changeWeek("prev")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  changeWeek("prev");
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label="Previous Week"
+            >
               <FaArrowLeftLong />
-            </a>
+            </button>
           )}
           {currentWeek < weeksList.length - 1 && (
-            <a className="cursor-pointer" onClick={() => changeWeek("next")}>
+            <button
+              className="cursor-pointer"
+              onClick={() => changeWeek("next")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  changeWeek("next");
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label="Next Week"
+            >
               <FaArrowRightLong />
-            </a>
+            </button>
           )}
         </div>
       </div>
