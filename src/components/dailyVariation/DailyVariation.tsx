@@ -7,8 +7,8 @@ function DailyVariation() {
 
   return (
     <div>
-      <div className="text-end place-self-end">
-        <p className="font-bold text-xl text-">
+      <div className="lg:text-end sm:items-center sm:text-center lg:place-self-end">
+        <p className="font-bold text-xl">
           {sign}
           {percentageVariation}%
         </p>

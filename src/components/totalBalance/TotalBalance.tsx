@@ -11,7 +11,7 @@ const TotalBalance: React.FC = () => {
   return (
     <div className="mx-96 my-5 pt-20">
       <Languages />
-      <div className="bg-green-700 text-white rounded-xl p-5 flex justify-between">
+      <div className="bg-green-700 text-white rounded-xl p-5 flex sm:flex-col md:flex-row sm:items-center md: items-stretch md:justify-between">
         <div className="ms-5">
           <h2 className="font-sans">{t("TotalBalance")}</h2>
           <p className="font-sans font-bold text-3xl">{totalWeekBalance}€</p>

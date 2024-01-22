@@ -70,9 +70,9 @@ function GraphicData() {
   };
 
   return (
-    <div className="mx-96 pb-20">
-      <div className=" bg-yellow-200 rounded-3xl p-10 font-sans">
-        <h2 className="flex justify-start text-2xl font-bold mb-10">
+    <div className="mx-96 pb-20 sm:flex-col">
+      <div className=" bg-yellow-200  rounded-3xl p-10 font-sans">
+        <h2 className="flex justify-start sm:text-sm md:text-xl font-bold mb-10">
           {t("ExpensesLastWeek")}
         </h2>
         <p className="text-3xl font-bold  text-black pb-5"></p>
@@ -81,11 +81,11 @@ function GraphicData() {
         <div className="flex justify-between mt-3"></div>
 
         <hr className="border-2" />
-        <div className="rounded-xl py-5 flex justify-between">
+        <div className="rounded-xl py-5 flex sm:flex-col md:flex-row sm:items-center md:justify-between">
           <div>
             <DailyExpenses />
           </div>
-          <div className="text-end place-self-end">
+          <div className="lg:text-end">
             <DailyVariation />
           </div>
         </div>
